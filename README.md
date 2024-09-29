@@ -7,5 +7,6 @@ This README is a WIP. Some goals for the readme in mind:
 - repository structure
 - developer installation and contribution instructions
 Aqib Rahim
+Yurica Xu
 
 irene test
