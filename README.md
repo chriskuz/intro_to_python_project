@@ -9,4 +9,28 @@ This README is a WIP. Some goals for the readme in mind:
 Aqib Rahim
 Yurica Xu
 
+<<<<<<< Updated upstream
 irene test
+=======
+
+
+# Title
+
+## Smaller Title
+
+### Smaller title
+
+Text
+
+**Bold Text**
+
+__Bold text__
+
+*Italicized text*
+
+# Author Names
+
+- Chris Kuzemka
+
+- Irene Chau
+>>>>>>> Stashed changes
