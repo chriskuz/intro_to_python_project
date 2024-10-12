@@ -6,6 +6,7 @@ import cmath
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+
 ##Bring in table
 relative_path_to_native_data = "../data/jetblue_df.csv"
 relative_path_to_new_data_destination = "../data/cleaned_jetblue_df.csv"
@@ -20,7 +21,13 @@ df.dropna(inplace=True)
 
 #Label cleaning
 
+
+
+
 ##Feature reduction
+
+
+
 #drop redundant airline codes and redundant 
 
 ##Save Table into data folder
