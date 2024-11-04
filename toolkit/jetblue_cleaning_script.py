@@ -6,6 +6,23 @@ import cmath
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+##Functions
+def extract_time(time_string):
+    segments = time_string.split("||")
+    first_segment = segments[0]
+
+    datetime = dt.fromisoformat(first_segment)
+    return datetime.time()
+
+def kpi_creation(df):
+    ## 
+    df["daysLeft"] = df["flightDate"] - df["searchDate"].dt.days
+    # df["dollarPerMile"]
+    # df["milePerDollar"]
+    # df["monthly_average"]
+
+    return df
+
 ##Bring in table
 relative_path_to_native_data = "../data/jetblue_df.csv"
 relative_path_to_new_data_destination = "../data/cleaned_jetblue_df.csv"
@@ -18,10 +35,28 @@ df.drop("Unnamed: 0", axis=1, inplace=True)
 ##Remove Null Values
 df.dropna(inplace=True)
 
-#Label cleaning
+#Filtering out JetBlue partners
+pure_jetblue_filter = [" 'JetBlue Airways', 'JetBlue Airways||JetBlue Airways','JetBlue Airways||JetBlue Airways||JetBlue Airways' "]
+df = df[ df["segmentsAirlineName"].isin(pure_jetblue_filter) ]
+
+##Label cleaning
+
+#Datetime Conversion
+# Convert 'searchDate' and 'flightDate' to datetime, handling potential errors
+df['searchDate'] = pd.to_datetime(df['searchDate'], format='%Y-%m-%d', errors='coerce')
+df['flightDate'] = pd.to_datetime(df['flightDate'], format='%Y-%m-%d', errors='coerce')
+
+# Ensure the columns are of datetime type
+df['searchDate'] = df['searchDate'].astype('datetime64[ns]')
+df['flightDate'] = df['flightDate'].astype('datetime64[ns]')
+
+
+
+##Feature Engineering
+df = kpi_creation(df)
 
 ##Feature reduction
-#drop redundant airline codes and redundant 
+#drop redundant airline codes and redundant airline names
 
 ##Save Table into data folder
 df.to_csv(relative_path_to_new_data_destination, index=False)
