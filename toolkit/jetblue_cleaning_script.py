@@ -87,8 +87,8 @@ def kpi_creation(df):
 
 ##Bring in table
 relative_path_to_native_data = "../data/jetblue_df.csv"
-# relative_path_to_new_data_destination = "../data/cleaned_jetblue_df.csv"
-relative_path_to_new_data_destination = "../data/testing_cleaned_jetblue_df.csv"
+relative_path_to_new_data_destination = "../data/cleaned_jetblue_df.csv"
+# relative_path_to_new_data_destination = "../data/testing_cleaned_jetblue_df.csv"
 
 df = pd.read_csv(relative_path_to_native_data) 
 
@@ -124,9 +124,9 @@ df = df[
     ]  
 
 
-##iltering out JetBlue partners
-pure_jetblue_filter = [" 'JetBlue Airways', 'JetBlue Airways||JetBlue Airways','JetBlue Airways||JetBlue Airways||JetBlue Airways' "] #here for interpretability
-df = df[ df["segmentsAirlineName"].isin(pure_jetblue_filter) ]
+# #Filtering out JetBlue partners
+# pure_jetblue_filter = ['JetBlue Airways', 'JetBlue Airways||JetBlue Airways','JetBlue Airways||JetBlue Airways||JetBlue Airways'] #here for interpretability
+# df = df[ df["segmentsAirlineName"].isin(pure_jetblue_filter) ]
 
 
 ##Label cleaning
