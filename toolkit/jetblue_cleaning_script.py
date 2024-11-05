@@ -57,6 +57,7 @@ df = kpi_creation(df)
 
 ##Feature reduction
 #drop redundant airline codes and redundant airline names
+#drop redundant airline codes and redundant airline names
 
 ##Save Table into data folder
 df.to_csv(relative_path_to_new_data_destination, index=False)
