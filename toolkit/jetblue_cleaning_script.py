@@ -65,14 +65,15 @@ def feature_creation(df):
     df['route']=df['startingAirport'] + '|' + df['destinationAirport']
     relocate_route_col = df.pop('route')
     df.insert(1,'route', relocate_route_col)
-    pass
+    
+    return df
 
 
 
 #For KPI feature creation
 def kpi_creation(df):
 
-    df["daysLeft"] = df["flightDate"] - df["searchDate"].dt.days
+    df["daysLeft"] = (df["flightDate"] - df["searchDate"]).dt.days
     df['numStops']= df['segmentsAirlineName'].apply(lambda x: len(x.split('||'))-1)
     # df["dollarPerMile"]
     # df["milePerDollar"]
@@ -98,7 +99,7 @@ dropped_columns = [
     "segmentsAirlineCode", #redundant
     "segmentsEquipmentDescription", #dirty
     "fareBasisCode", #bloat
-    "legID", #bloat
+    "legId", #bloat
     "segmentsDistance", #bloat
     # "travelDuration" #bloat?
     "segmentsDepartureTimeEpochSeconds",
@@ -135,6 +136,7 @@ df = table_datetime_conversion(df)
 
 ##Feature Engineering
 #Feature Creation
+df = feature_creation(df)
 
 
 #KPI Creation
