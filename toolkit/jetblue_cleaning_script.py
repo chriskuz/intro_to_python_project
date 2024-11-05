@@ -115,6 +115,10 @@ df.dropna(inplace=True)
 ##Filtering only "NY" routes..
 # EWR (NJ airport) included as it's poopular for New Yorkers to travel to Newark for flights.
 ny_filter = ["JFK", "LGA", "EWR"]
+df = df[
+    (df)
+]
+
 
 ##Filtering out JetBlue partners
 pure_jetblue_filter = [" 'JetBlue Airways', 'JetBlue Airways||JetBlue Airways','JetBlue Airways||JetBlue Airways||JetBlue Airways' "] #here for interpretability
