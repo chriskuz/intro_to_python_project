@@ -112,15 +112,18 @@ df.drop(columns=dropped_columns, axis=1, inplace=True)
 df.dropna(inplace=True)
 
 
-##Filtering only "NY" routes..
+##Filtering
+
+# Filtering only "NY" routes..
 # EWR (NJ airport) included as it's poopular for New Yorkers to travel to Newark for flights.
 ny_filter = ["JFK", "LGA", "EWR"]
 df = df[
-    (df)
-]
+    (df["startingAirport"].isin(ny_filter)) |         #only starting airport
+    (df["destinationAirport"].isin(ny_filter))        #only destination airports
+    ]  
 
 
-##Filtering out JetBlue partners
+##iltering out JetBlue partners
 pure_jetblue_filter = [" 'JetBlue Airways', 'JetBlue Airways||JetBlue Airways','JetBlue Airways||JetBlue Airways||JetBlue Airways' "] #here for interpretability
 df = df[ df["segmentsAirlineName"].isin(pure_jetblue_filter) ]
 
