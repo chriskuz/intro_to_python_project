@@ -14,8 +14,8 @@ irene test
 =======
 
 
-# Title
-
+# JetBlue Flight Price Analysis
+Analyze JetBlue flight price data to identify trends, make predictions, and provide actionable insights for consumers.
 ## Smaller Title
 
 ### Smaller title
