@@ -15,8 +15,13 @@ irene test
 
 
 # JetBlue Flight Price Analysis
-Analyze JetBlue flight price data to identify trends, make predictions, and provide actionable insights for consumers.
-## Smaller Title
+JetBlue flight price Analysis is a simple script to identify trends, make predictions, and provide actionable insights for consumers. It focuses on determining the best time to book JetBlue flights to get the lowest fares.
+## Hypothesis
+*Booking lead time significantly impacts ticket prices, with prices likely decreasing initially and rising sharply closer to the departure date.
+*Seasonality and holidays lead to higher prices for JetBlue flights, particularly for popular routes during peak travel seasons.
+*Certain routes may show more stable pricing patterns, while others experience higher volatility, particularly for routes to or from high-demand destinations.
+## Data
+*JetBlue Historical Pricing Data(https://www.kaggle.com/datasets/dilwong/flightprices)
 
 ### Smaller title
 
