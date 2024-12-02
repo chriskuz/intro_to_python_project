@@ -6,13 +6,9 @@ This README is a WIP. Some goals for the readme in mind:
 - data used + data dictionary
 - repository structure
 - developer installation and contribution instructions
-Aqib Rahim
-Yurica Xu
-
 <<<<<<< Updated upstream
-irene test
-=======
 
+=======
 
 # JetBlue Flight Price Analysis
 JetBlue flight price Analysis is a simple script to identify trends, make predictions, and provide actionable insights for consumers. It focuses on determining the best time to book JetBlue flights to get the lowest fares.
@@ -53,12 +49,6 @@ JetBlue flight price Analysis is a simple script to identify trends, make predic
 
 ---
 
-## Installation & Usage
-
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/your-repo-name/JetBlue-Flight-Price-Analysis.git
-   cd JetBlue-Flight-Price-Analysis
 
 Text
 
