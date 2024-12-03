@@ -65,6 +65,28 @@ def feature_creation(df):
     df['route']=df['startingAirport'] + '|' + df['destinationAirport']
     relocate_route_col = df.pop('route')
     df.insert(1,'route', relocate_route_col)
+
+    #dayOfWeek creation
+    df["searchDayofWeek"] = df["searchDate"].dt.day_name() #day of week for the search date
+    df["flightDayOfWeek"] = df["flightDate"].dt.day_name() #day of week for the flight date
+
+    #reorders the columns to have the dayOfWeek features align near the actual search datess
+    columns_order = []
+    for col in df.columns:
+        columns_order.append(col)
+        if col == 'searchDate':
+            columns_order.append('searchDayOfWeek')
+        if col == 'flightDate':
+            columns_order.append('flightDayOfWeek')
+    
+    columns_order = list(dict.fromkeys(columns_order))
+    df = df[columns_order]
+
+    #isHoliday creation
+
+    #nearHoliday creation
+
+    #squished integer date creation for modeling
     
     return df
 
