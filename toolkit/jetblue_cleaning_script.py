@@ -137,6 +137,10 @@ df.drop(columns=dropped_columns, axis=1, inplace=True)
 df.dropna(inplace=True)
 
 
+##Remove Duplicates
+df.drop_duplicates(inplace=True)
+
+
 ##Filtering
 
 # Filtering only "NY" routes..
@@ -165,6 +169,20 @@ df = feature_creation(df)
 
 #KPI Creation
 df = kpi_creation(df)
+
+
+##Remove white space
+cols_to_strip_white_space = [
+    "route",
+    "startingAirport",
+    "destinationAirport",
+    "segmentsArrivalAirportCode",
+    "segmentsDepartureAirportCode",
+    "segmentsCabinCode",
+    "segmentsAirlineName"
+]
+for col in cols_to_strip_white_space:
+    df[col] = df[col].str.replace(r"\s+", "", regex=True)
 
 
 ##Feature reduction
