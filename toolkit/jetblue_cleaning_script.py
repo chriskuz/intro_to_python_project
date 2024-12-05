@@ -125,7 +125,7 @@ dropped_columns = [
     "fareBasisCode", #bloat
     "legId", #bloat
     "segmentsDistance", #bloat
-    # "travelDuration" #bloat?
+    "travelDuration" #bloat?
     "segmentsDepartureTimeEpochSeconds",
     "segmentsArrivalTimeEpochSeconds"
 
