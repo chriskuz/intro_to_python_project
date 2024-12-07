@@ -158,8 +158,6 @@ dropped_columns = [
     "travelDuration", #bloat
     "segmentsDepartureTimeEpochSeconds", #wont use
     "segmentsArrivalTimeEpochSeconds", #wont use
-    "segmentsDepartureTimeRaw", #bloat
-    "segmentsArrivalTimeRaw" #bloat
 
 ]
 df.drop(columns=dropped_columns, axis=1, inplace=True)
