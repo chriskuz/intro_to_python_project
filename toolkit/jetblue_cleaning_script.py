@@ -156,8 +156,10 @@ dropped_columns = [
     "legId", #bloat
     "segmentsDistance", #bloat
     "travelDuration", #bloat
-    "segmentsDepartureTimeEpochSeconds",
-    "segmentsArrivalTimeEpochSeconds"
+    "segmentsDepartureTimeEpochSeconds", #wont use
+    "segmentsArrivalTimeEpochSeconds", #wont use
+    "segmentsDepartureTimeRaw", #bloat
+    "segmentsArrivalTimeRaw" #bloat
 
 ]
 df.drop(columns=dropped_columns, axis=1, inplace=True)
