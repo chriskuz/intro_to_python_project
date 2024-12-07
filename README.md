@@ -20,35 +20,44 @@ JetBlue flight price Analysis is a simple script to identify trends, make predic
 *JetBlue Historical Pricing Data(https://www.kaggle.com/datasets/dilwong/flightprices)
 
 ## Data Dictionary
+# Data Dictionary
 
-| **Data Variable**          | **Type**          | **Description**                               |
-|-----------------------------|-------------------|-----------------------------------------------|
-| `ident`                    | String Object     | Identification of a flight                   |
-| `actual_ident`             | String Object     | Original identification of a codeshared flight |
-| `departuretime`            | String Object     | Departure time of flight (date, hours, minutes) |
-| `arrival_time`             | String Object     | Arrival time of flight (date, hours, minutes) |
-| `origin`                   | String Object     | Origin ICAO code                              |
-| `destination`              | String Object     | Destination ICAO code                         |
-| `aircrafttype`             | String Object     | Type of aircraft flown                        |
-| `meal_service`             | String Object     | Type of meal service provided on flight       |
-| `seats_cabin_first`        | Integer           | Number of first-class seats available         |
-| `seats_cabin_business`     | Integer           | Number of business-class seats available      |
-| `seats_cabin_coach`        | Integer           | Number of coach-class seats available         |
-| `origin_IATA`              | String Object     | Origin IATA code                              |
-| `destination_IATA`         | String Object     | Destination IATA code                         |
-| `flight_duration`          | String Object     | Flight duration in seconds                    |
-| `MinPrice`                 | Float             | Minimum price for a ticket on the flight      |
-| `Direct`                   | Boolean Object    | Indicates whether the route is direct         |
-| `OriginName`               | String Object     | Origin airport name                           |
-| `OriginCityName`           | String Object     | Origin city name                              |
-| `OriginCountryName`        | String Object     | Origin country name                           |
-| `DestinationName`          | String Object     | Destination airport name                      |
-| `DestinationCityName`      | String Object     | Destination city name                         |
-| `DestinationCountryName`   | String Object     | Destination country name                      |
-| `CarrierName`              | String Object     | Carrier name associated with the flight       |
-
----
-
+| Variable Name | Expected Data Type | Description |
+|--------------|-------------------|-------------|
+| searchDate | datetime | Date when the flight search was performed |
+| searchDayOfWeek | int/string | Day of the week when search was performed |
+| route | string | Flight route code |
+| flightDate | datetime | Scheduled date of the flight |
+| flightDayOfWeek | int/string | Day of the week of the flight |
+| startingAirport | string | Departure airport code |
+| destinationAirport | string | Arrival airport code |
+| elapsedDays | int | Number of days between search date and flight date |
+| isBasicEconomy | boolean | Whether the ticket is basic economy class |
+| isRefundable | boolean | Whether the ticket is refundable |
+| isNonStop | boolean | Whether the flight is non-stop |
+| baseFare | float | Base ticket price before taxes and fees |
+| totalFare | float | Total price including all taxes and fees |
+| seatsRemaining | int | Number of seats available |
+| totalTravelDistance | float | Total flight distance |
+| segmentsDepartureTimeRaw | datetime | Raw departure time for flight segments |
+| segmentsArrivalTimeRaw | datetime | Raw arrival time for flight segments |
+| segmentsArrivalAirportCode | string | Airport code for segment arrival |
+| segmentsDepartureAirportCode | string | Airport code for segment departure |
+| segmentsAirlineName | string | Name of the airline |
+| segmentsDurationInSeconds | int | Duration of flight segments in seconds |
+| segmentsCabinCode | string | Cabin class code |
+| departureTime | datetime | Flight departure time |
+| arrivalTime | datetime | Flight arrival time |
+| departureCategory | string | Category of departure time (e.g., morning/afternoon) |
+| arrivalCategory | string | Category of arrival time (e.g., morning/afternoon) |
+| isHolidaySearchDate | boolean | Whether the search date is a holiday |
+| isHolidayFlightDate | boolean | Whether the flight date is a holiday |
+| nearHolidaySearchDate | boolean | Whether the search date is near a holiday |
+| nearHolidayFlightDate | boolean | Whether the flight date is near a holiday |
+| searchDateInt | int | Integer representation of search date |
+| flightDateInt | int | Integer representation of flight date |
+| daysLeft | int | Days remaining until flight departure |
+| numStops | int | Number of stops in the flight route |
 
 Text
 
