@@ -17,7 +17,7 @@ general_onehot_encoding_filter = [
     "startingAirport",
 ] 
 
-
+nunique_scalers_on_onehot = [lambda x: if ]
 
 
 ## Niche Encoding
@@ -48,7 +48,10 @@ non_partnered_airlines = [
 
 niche_df["hasPartnership"] = df["segmentsAirlineName"].apply(lambda names: 1 if names in non_partnered_airlines else 0)
 
+##Drop the encoded columns
 
+
+niche_df.drop(columns=niche_encoding_filter, axis=1, inplace=True)
 
 
 ##General One Hot
@@ -68,7 +71,7 @@ model_encoded_df = pd.concat([encoded_df, niche_df], axis=1)
 
 
 ## Save DF
-relative_path_to_new_data_destination = "../data/model_encoded_jetblue_df.csv"
-# relative_path_to_new_data_destination = "../data/testing_model_encoded_jetblue_df.csv"
+# relative_path_to_new_data_destination = "../data/model_encoded_jetblue_df.csv"
+relative_path_to_new_data_destination = "../data/testing_model_encoded_jetblue_df.csv"
 
 model_encoded_df.to_csv(relative_path_to_new_data_destination, index=False)
