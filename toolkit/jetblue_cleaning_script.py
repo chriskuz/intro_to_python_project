@@ -65,6 +65,61 @@ def feature_creation(df):
     df['route']=df['startingAirport'] + '|' + df['destinationAirport']
     relocate_route_col = df.pop('route')
     df.insert(1,'route', relocate_route_col)
+
+    #dayOfWeek creation
+    df["searchDayOfWeek"] = df["searchDate"].dt.day_name() #day of week for the search date
+    df["flightDayOfWeek"] = df["flightDate"].dt.day_name() #day of week for the flight date
+
+    #reorders the columns to have the dayOfWeek features align near the actual search datess
+    columns_order = []
+    for col in df.columns:
+        columns_order.append(col)
+        if col == 'searchDate':
+            columns_order.append('searchDayOfWeek')
+        if col == 'flightDate':
+            columns_order.append('flightDayOfWeek')
+    
+    columns_order = list(dict.fromkeys(columns_order))
+    df = df[columns_order]
+
+    #isHoliday creation AND nearHoliday creation
+    HOLIDAYS_LIST = [
+        "2022-04-15", #Good Friday
+        "2022-04-17", #Easter Sunday
+        "2022-04-23", #NYC Spring Break
+        "2022-04-30", #Solar Eclips
+        "2022-05-02", #Eid al-Fitr
+        "2022-05-08", #Mother's Day
+        "2022-05-30", #Memorial Day
+        "2022-06-19", #Juneteenth AND Father's Day
+        "2022-06-20", #Observed Juneteenth
+        "2022-07-04", #Independence Day
+        "2022-06-26", #NYC Pride March
+        "2022-07-22", #Comic-Con NYC start
+        "2022-09-05", #Labor Day
+    ]
+    holidays = pd.to_datetime(HOLIDAYS_LIST)
+
+    df["isHolidaySearchDate"] = df["searchDate"].isin(holidays).astype(int)
+    df["isHolidayFlightDate"] = df["flightDate"].isin(holidays).astype(int)
+    
+
+    def is_near_holiday(date, holidays, window=6): #window default for 6 day windows around holidays should capture a full week given the 7th day is the holiday itself
+        return any( (date > holiday - pd.Timedelta(days=window)) & (date < holiday + pd.Timedelta(days=window)) for holiday in holidays )
+
+    df["nearHolidaySearchDate"] = (
+        df["searchDate"].apply(lambda searchDate: 1 if is_near_holiday(searchDate, holidays, window=6) else 0)
+    )
+    df["nearHolidayFlightDate"] = (
+        df["flightDate"].apply(lambda flightDate: 1 if is_near_holiday(flightDate, holidays, window=6) else 0)
+    )
+
+    df.loc[df["isHolidaySearchDate"] == 1, "nearHolidaySearchDate"] = 0 #override to make sure is and near are separate on specific offending rows
+    df.loc[df["isHolidayFlightDate"] == 1, "nearHolidayFlightDate"] = 0 #override to make sure is and near are separate on specific offending rows
+
+    #Squished integer date creation for modeling
+    df["searchDateInt"] = df["searchDate"].dt.strftime("%Y%m%d").astype(int)
+    df["flightDateInt"] = df["flightDate"].dt.strftime("%Y%m%d").astype(int)
     
     return df
 
@@ -92,7 +147,6 @@ relative_path_to_new_data_destination = "../data/cleaned_jetblue_df.csv"
 
 df = pd.read_csv(relative_path_to_native_data) 
 
-
 ##Drop unused columns
 dropped_columns = [
     "Unnamed: 0", #useless
@@ -101,9 +155,9 @@ dropped_columns = [
     "fareBasisCode", #bloat
     "legId", #bloat
     "segmentsDistance", #bloat
-    # "travelDuration" #bloat?
-    "segmentsDepartureTimeEpochSeconds",
-    "segmentsArrivalTimeEpochSeconds"
+    "travelDuration", #bloat
+    "segmentsDepartureTimeEpochSeconds", #wont use
+    "segmentsArrivalTimeEpochSeconds", #wont use
 
 ]
 df.drop(columns=dropped_columns, axis=1, inplace=True)
@@ -111,6 +165,10 @@ df.drop(columns=dropped_columns, axis=1, inplace=True)
 
 ##Remove Null Values
 df.dropna(inplace=True)
+
+
+##Remove Duplicates
+df.drop_duplicates(inplace=True)
 
 
 ##Filtering
@@ -129,6 +187,11 @@ df = df[
 # df = df[ df["segmentsAirlineName"].isin(pure_jetblue_filter) ]
 
 
+##Price outlier cutting
+df = df[
+    df["totalFare"] <= 1500 #chosen based on plot of total fare spread 
+]
+
 ##Label cleaning
 #Datetime Conversion
 df = table_datetime_conversion(df)
@@ -141,6 +204,20 @@ df = feature_creation(df)
 
 #KPI Creation
 df = kpi_creation(df)
+
+
+##Remove white space
+cols_to_strip_white_space = [
+    "route",
+    "startingAirport",
+    "destinationAirport",
+    "segmentsArrivalAirportCode",
+    "segmentsDepartureAirportCode",
+    "segmentsCabinCode",
+    "segmentsAirlineName"
+]
+for col in cols_to_strip_white_space:
+    df[col] = df[col].str.replace(r"\s+", "", regex=True)
 
 
 ##Feature reduction
