@@ -68,7 +68,7 @@ model_encoded_df = pd.concat([encoded_df, niche_df], axis=1)
 
 
 ## Save DF
-# relative_path_to_new_data_destination = "../data/model_encoded_jetblue_df.csv"
-relative_path_to_new_data_destination = "../data/testing_model_encoded_jetblue_df.csv"
+relative_path_to_new_data_destination = "../data/model_encoded_jetblue_df.csv"
+# relative_path_to_new_data_destination = "../data/testing_model_encoded_jetblue_df.csv"
 
 model_encoded_df.to_csv(relative_path_to_new_data_destination, index=False)
