@@ -2,12 +2,6 @@
 
 This README is a WIP. Some goals for the readme in mind:
 
-- project description, hypothesis, abstract
-- data used + data dictionary
-- repository structure
-- developer installation and contribution instructions
-<<<<<<< Updated upstream
-
 =======
 
 # JetBlue Flight Price Analysis
@@ -20,7 +14,6 @@ JetBlue flight price Analysis is a simple script to identify trends, make predic
 *JetBlue Historical Pricing Data(https://www.kaggle.com/datasets/dilwong/flightprices)
 
 ## Data Dictionary
-# Data Dictionary
 
 | Variable Name | Expected Data Type | Description |
 |--------------|-------------------|-------------|
@@ -59,17 +52,13 @@ JetBlue flight price Analysis is a simple script to identify trends, make predic
 | daysLeft | int | Days remaining until flight departure |
 | numStops | int | Number of stops in the flight route |
 
-Text
 
-**Bold Text**
-
-__Bold text__
-
-*Italicized text*
 
 # Author Names
 
 - Chris Kuzemka
-
 - Irene Chau
+- Fangyuan Xu
+- Ali Nazim
+- Aqib Rahim
 >>>>>>> Stashed changes
