@@ -17,8 +17,6 @@ general_onehot_encoding_filter = [
     "startingAirport",
 ] 
 
-nunique_scalers_on_onehot = [lambda x: if ]
-
 
 ## Niche Encoding
 # Cyclic weekend encoding
@@ -37,7 +35,11 @@ niche_df = niche_df[niche_encoding_filter]
 
 niche_df["searchDayOfWeekHierarchyEncoded"] = niche_df["searchDayOfWeek"].map(DAY_OF_WEEK_HIERARCHY_DICT)
 niche_df["searchDayOfWeekSine"] = np.sin(2 * np.pi * niche_df["searchDayOfWeekHierarchyEncoded"] / 7)
-niche_df["searchDayOfWeekCosinee"] = np.cos(2 * np.pi * niche_df["searchDayOfWeekHierarchyEncoded"] / 7)
+niche_df["searchDayOfWeekCosine"] = np.cos(2 * np.pi * niche_df["searchDayOfWeekHierarchyEncoded"] / 7)
+
+niche_df["flightDayOfWeekHierarchyEncoded"] = niche_df["flightDayOfWeek"].map(DAY_OF_WEEK_HIERARCHY_DICT)
+niche_df["flightDayOfWeekSine"] = np.sin(2 * np.pi * niche_df["flightDayOfWeekHierarchyEncoded"] / 7)
+niche_df["flightDayOfWeekCosine"] = np.cos(2 * np.pi * niche_df["flightDayOfWeekHierarchyEncoded"] / 7)
 
 # Partnership encoding 
 non_partnered_airlines = [
